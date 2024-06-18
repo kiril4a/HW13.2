@@ -1,0 +1,23 @@
+{% extends "quotes/base.html" %}
+
+{% block title %}Author Detail{% endblock %}
+
+{% block content %}
+<h2>{{ author.fullname }}</h2>
+<p>{{ author.description }}</p>
+<p><strong>Born:</strong> {{ author.born_date }} in {{ author.born_location }}</p>
+<h3>Quotes</h3>
+<div class="row">
+    {% for quote in quotes %}
+        <div class="col-md-4">
+            <blockquote class="blockquote">
+                <p class="mb-0">{{ quote.text }}</p>
+                <footer class="blockquote-footer">
+                    <a href="{% url 'author-detail' quote.author.id %}">{{ quote.author.fullname }}</a>
+                </footer>
+                <small>Tags: {{ quote.tags }}</small>
+            </blockquote>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
